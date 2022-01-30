@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            width:100%;
+            height: 600px;
+            display:flex;
+            flex-direction: column;
+        }
+        #login{
+            width: 300px;
+            height: 500px;
+            margin:auto;
+           }
+         form{
+            display:flex;
+            flex-direction: column;
+            }
+         input{
+             width:30%;
+             height: 30px;
+             margin:auto;
+             border-radius:10px;
+             border: 1px solid black;
+         }
+         p{
+             margin-left:35%;
+         }
+         #submit{
+             width:150px;
+             height:50px;
+             margin: auto;
+             margin-top:30px;
+             background-color:blue;
+             color: white;
+             font-size: 15px;
+             font-weight: bold;
+         }
+         #signinDiv{
+             display:flex;
+             flex-direction: column;
+             margin-top: 50px;
+             justify-content: center;
+         }
+         h1{
+             margin: auto;
+             margin-top: 10px;
+             /* color: white; */
+             font-size: 45px;
+             font-weight: bold;
+         }
+         #signin
+         {
+             width: 400px;
+             height:50px;
+             margin: auto;
+             border-radius:20px;
+             border:none;
+             background-color:blue;
+             color: white;
+             font-size: 18px;
+             font-weight: bold;
+
+        }
+        #create-account{
+            width: 300px;
+             height:50px;
+             margin: auto;
+             border-radius:20px;
+             border:none;
+             background-color:blue;
+             color: white;
+             font-size: 25px;
+             font-weight: bold;
+             display:flex;
+             flex-direction: column;
+             margin-top: 50px;
+             padding-left: 5%;
+             justify-content: center;
+        }
+        body{
+            background-color:orangered;
+        }
+         
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="signinDiv"> <button id="signin" onclick="window.open(`/ES6/login.html`)">Log in</button><h1>or</h1> </div>
+        <div><h1 id="create-account">Create your account</h1></div>
+            <div id="login"></div>
+            <form onsubmit="register()" id="form">
+                <p>Enter your name</p>
+                <input type="text" id="name" placeholder="Enter your name">
+                <p>Enter user name</p>
+                <input type="text" id="username" placeholder="Enter user name">
+                <p>Enter your E-mail</p>
+                <input type="email" id="email" placeholder="Enter your mail id" >
+                <p>Enter password</p>
+                <input type="password" id="password" placeholder="Enter password" >
+                <p>Confirm password</p>
+                <input type="password" id="confirm_password" placeholder="Confirm Password">
+                
+                <input value="Create Account" type="submit" id="submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let data = JSON.parse(localStorage.getItem("youtubeSignUpData")) || [];
+    async function register(){
+        event.preventDefault();
+
+        console.log(form.password.value)
+        
+        try{
+            let obj = {
+            name: form.name.value,
+            username: form.username.value,
+            email: form.email.value,
+            password: form.password.value,
+            confirm_password: form.confirm_password.value,
+        };
+            if(obj.name == ""){
+                alert("please enter your name")
+                }
+            else if(obj.username == ""){
+                alert("please enter username")
+                }
+            else if(obj.email == ""){
+                alert("please enter your email-Id")
+                }
+            else if(obj.password == ""){
+                alert("please enter your password")
+                }
+            else if(obj.confirm_password == null){
+                alert("password not matched")
+                }    
+            else if(obj.password != obj.confirm_password){
+                alert("password not matched")
+                }
+                else if(((obj.name && obj.username && obj.email)!=="") && (obj.password === obj.confirm_password)){
+                    
+                    alert("sign up successfully");
+                    data.push(obj);
+                    localStorage.setItem("youtubeSignUpData",JSON.stringify(data));
+                    window.open("/ES6/login.html");
+                }
+                else{
+                    alert("you enteredl wrong data")
+                }
+                                     
+         }
+        catch(err){
+            console.log('err:', err)
+        }
+      
+        
+        
+    }
+
+</script>
