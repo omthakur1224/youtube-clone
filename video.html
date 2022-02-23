@@ -1,68 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/ES6/nav.css">
+    <link rel="stylesheet" href="nav.css">
     <style>
-        #navbar{
-            height:100px;
+        #navbar {
+            height: 100px;
             /* border:solid 1px rgb(0, 0, 0); */
         }
-        #main{
-            display:flex;
+        
+        #main {
+            display: flex;
             height: 600px;
             /* border:solid 1px red; */
         }
-        #video_details{
+        
+        #video_details {
             flex: 3;
             /* border:solid 1px rgb(0, 255, 64); */
         }
-        #recomendation{
+        
+        #recomendation {
             flex: 1;
             /* border:solid 1px rgb(68, 0, 255); */
         }
-
     </style>
 </head>
+
 <body>
     <div id="container"></div>
-    <div id ="main">
+    <div id="main">
         <div id="video_details"></div>
         <div id="recomendation"></div>
 
-    
+
     </div>
 </body>
+
 </html>
 
 <script type="module">
-    import navbar from "/ES6/nav.js";
-    let nav_div = document.getElementById('container');
-    nav_div.innerHTML=navbar();
+    import navbar from "/nav.js"; let nav_div = document.getElementById('container'); nav_div.innerHTML=navbar();
 </script>
 
 <script>
-    let {videoId,snippet, snippet:{channelId, title, channelTitle, description}} = JSON.parse(localStorage.getItem("clicked_video"));
-    
+    let {
+        videoId,
+        snippet,
+        snippet: {
+            channelId,
+            title,
+            channelTitle,
+            description
+        }
+    } = JSON.parse(localStorage.getItem("clicked_video"));
+
     let video_div = document.getElementById('video_details');
 
     let iframe = document.createElement('iframe');
-            iframe.src=`https://www.youtube.com/embed/${videoId}`;
-            iframe.width = "100%";
-            iframe.height = "100%";
-            iframe.setAttribute("allowfullscreen", "true");
-            console.log('snippet:', snippet)   
+    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+    iframe.width = "100%";
+    iframe.height = "100%";
+    iframe.setAttribute("allowfullscreen", "true");
+    console.log('snippet:', snippet)
     let h3 = document.createElement('h3');
-    h3.innerHTML=title;
+    h3.innerHTML = title;
     let h4 = document.createElement('h4');
-    h4.innerHTML= channelTitle;
+    h4.innerHTML = channelTitle;
 
     let p = document.createElement('p');
-    p.innerHTML=description;
-    
-    video_div.append(iframe,h3,h4,p);
-    
+    p.innerHTML = description;
+
+    video_div.append(iframe, h3, h4, p);
 </script>
